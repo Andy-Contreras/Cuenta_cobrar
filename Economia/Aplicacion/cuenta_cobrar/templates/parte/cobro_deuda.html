@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block regresar %}
+     <a class="btn btn btn-danger" href="{{url_anterior}}">
+            Regresar
+      </a>
+{% endblock %}
+
+{% block headcss %}
+    <link rel="stylesheet" href="{% static "css/diseño.css" %}">
+{% endblock %}
+
+{% block main %}
+
+    <div class="container-lg">
+                <h1 class="text-center"> Sección para realizar el pago </h1>
+                <form>
+                    <div class="tablapagos">
+                        <h3 class="text-center">Deuda perteneciente al documento: #6001</h3>
+                        <div class=" mb-4">
+                            <h4 class="titulos"> <label class="form-label"> Monto a abonar </label> </h4>
+                            <input type= "text" class="form-control" placeholder="Ingreso del dinero que desea abonar">
+                        </div>
+                        <div class="mb-4">
+                            <h4 class="titulos"> <label class="form-label"> Fecha del abono </label> </h4>
+                            <input type="date" class="form-control">
+                        </div>
+                        <div class="mb-4">
+                                <h4 class="titulos"> <label for="disabledTextInput" class="form-label"> Saldo deudor </label> {{ object.deuda}} </h4>
+                                 <input type="text" id="disabledTextInput" class="form-control" disabled>
+                        </div>
+                    </div>
+                </form>
+    </div>
+    <div class="container-lg cent" >
+        <a href="{% url 'cuenta_cobrar:cobro' %}"> <button type="button" class="btn btn-dark btn-lg" onclick="alert('Pago realizado con éxito')">
+        Realizar Pago <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cash" viewBox="0 0 16 16">
+        <path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/>
+        <path d="M0 4a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V6a2 2 0 0 1-2-2H3z"/>
+        </svg>
+        </button> </a>
+    </div>
+{% endblock %}
