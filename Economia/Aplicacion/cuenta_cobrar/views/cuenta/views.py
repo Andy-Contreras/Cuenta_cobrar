@@ -1,5 +1,5 @@
 from django.urls import reverse_lazy
-from django.views.generic import TemplateView,ListView,CreateView
+from django.views.generic import TemplateView, ListView, CreateView, DeleteView
 from Aplicacion.cuenta_cobrar.models import Cabecera
 from Aplicacion.cuenta_cobrar.forms import CabeceraForm
 
@@ -52,5 +52,22 @@ class crearTemplateView(TemplateView):
 
 class interesTemplateView(TemplateView):
     template_name = "parte/interes.html"
+
+
+class EliminarCuenta(DeleteView):
+    model = Cabecera
+    template_name = "parte/eliminar.html"
+    success_url = reverse_lazy('cuenta_cobrar:cobro')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['action_save'] = self.request.path
+        context['titulo'] = 'ELMINAR DE CUENTA'
+        context['url_anterior'] = '/cuenta_cobrar/cobro'
+        context['listar_url'] = '/cuenta_cobrar/cobro'
+        return context
+
+
+
 
 
